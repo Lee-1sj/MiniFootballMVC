@@ -204,4 +204,93 @@ public class MemberDAO {
         return loginSuccess;
     } //end of getMemberLogin()
 
-}
+    //관리자 로그인 기능
+    public boolean getAdminLogin(String id, String pw) {
+        String sql = "SELECT m_isadmin FROM MEMBERS WHERE m_id = ? AND m_pw = ?";
+        Connection con = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        boolean loginSuccess = false;
+        int verify;
+        try {
+            con = DBUtil.getConnection();
+            pstmt = con.prepareStatement(sql);
+            pstmt.setString(1, id);
+            pstmt.setString(2, pw);
+            rs = pstmt.executeQuery();
+
+            if(rs.next()){
+                verify = rs.getInt("m_isadmin");
+                if(verify == 1){
+                    System.out.println();
+                    System.out.println("Admin mode success");
+                    loginSuccess = true;
+                } else {
+                    System.out.println();
+                    System.out.println("Admin mode failed");
+                }
+            } else {
+                System.out.println();
+                System.out.println("No matching account exist.");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if(rs != null){
+                    rs.close();
+                }
+                if(pstmt != null){
+                    pstmt.close();
+                }               
+                if(con != null){
+                    con.close();
+                }
+            } catch (SQLException e) {
+            }
+        }
+        return loginSuccess;
+
+    } //end of getAdminLogin()
+
+    // memberId를 가지고 db를 찾아서 m_no를 불러옴
+    public int getMemberNum(String memberId) {
+        String sql = "SELECT m_no FROM MEMBERS WHERE m_id = ?";
+
+        Connection con = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        int m_no = -1;
+
+        try {
+            con = DBUtil.getConnection();
+            pstmt = con.prepareStatement(sql);
+            pstmt.setString(1, memberId);
+            rs = pstmt.executeQuery();
+            if(rs.next()){
+                m_no = rs.getInt("m_no");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if(rs != null){
+                    rs.close();
+                }
+                if(pstmt != null){
+                    pstmt.close();
+                }
+                if(con != null){
+                    con.close();
+                }
+            } catch (SQLException e) {
+            }
+        }
+        return m_no;
+    }
+
+} //end of class

@@ -64,4 +64,54 @@ public class MemberManager {
 
     } //end of singUpMember()
 
+    // 관리자 검증 기능
+    public void verifyAdmin() {
+        MemberDAO md = new MemberDAO();
+        String yesOrNo;
+        String id;
+        String pw;
+        boolean isAdmin = false;
+        // 관리자 로그인 확인
+        System.out.println();
+        System.out.println("===== Admin Log In ======");
+        do {
+            System.out.print("Input Admin ID >> ");
+            id = sc.nextLine();
+            System.out.print("Input Admin PW >> ");
+            pw = sc.nextLine();
+            
+            isAdmin = md.getAdminLogin(id, pw);
+            if (!isAdmin) {
+                System.out.println("The Admin account is not valid. Please re-enter.");
+                System.out.println();
+            }
+        } while (!isAdmin);
+
+    } //end of verifyAdmin()
+
+    //로그인 검증 기능
+    public String verifyMember() {
+        MemberDAO md = new MemberDAO();
+        String yesOrNo;
+        String id;
+        String pw;
+        boolean success = false;
+        // 로그인 확인
+        System.out.println();
+        System.out.println("===== Log In ======");
+        do {
+            System.out.print("Input ID >> ");
+            id = sc.nextLine();
+            System.out.print("Input PW >> ");
+            pw = sc.nextLine();
+
+            success = md.getMemberLogin(id, pw);
+            if (!success) {
+                System.out.println("The account information is not valid. Please re-enter.");
+                System.out.println();
+            }
+        } while (!success);
+        return id;
+    } //end of verifyMember()
+
 }
