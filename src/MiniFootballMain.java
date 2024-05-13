@@ -127,7 +127,6 @@ public class MiniFootballMain {
             default:
                 System.out.println("Please only enter the appropriate menu number.");
         }
-
     } // end of customMenu()
 
     // 이적 시장 메뉴

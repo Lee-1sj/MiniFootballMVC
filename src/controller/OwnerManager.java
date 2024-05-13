@@ -10,7 +10,7 @@ public class OwnerManager {
         OwnerDAO od = new OwnerDAO();
         MemberDAO md = new MemberDAO();
         PlayerDAO pd = new PlayerDAO();
-
+        
         m_no = md.getMemberNum(memberId);   //로그인 성공한 id로 m_no 불러옴
         System.out.println();
         System.out.println("List of My Players");

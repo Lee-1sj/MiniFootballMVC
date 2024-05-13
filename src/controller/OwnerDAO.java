@@ -8,7 +8,7 @@ import java.sql.SQLException;
 public class OwnerDAO {
 
     public int getPlayerNum(int m_no) {
-        String sql = "SELECT p_no FROM OWNER WHERE m_no = ?";
+        String sql = "SELECT * FROM owner o INNER JOIN player p ON  o.p_no = p.p_no WHERE m_no = ?";
         int p_no = -1;
         Connection con = null;
         PreparedStatement pstmt = null;
