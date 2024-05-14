@@ -293,4 +293,239 @@ public class MemberDAO {
         return m_no;
     }
 
+    //로그인한 id로 멤버의 잔액 조회하는 함수
+    public int getMemberBalance(String memberId) {
+        int balance = 0;
+        String sql = "SELECT m_balance FROM MEMBERS WHERE m_id = ?";
+
+        Connection con = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        try {
+            con = DBUtil.getConnection();
+            pstmt = con.prepareStatement(sql);
+            pstmt.setString(1, memberId);
+            rs = pstmt.executeQuery();
+            if(rs.next()){
+                balance = rs.getInt("m_balance");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if(rs != null){
+                    rs.close();
+                }
+                if(pstmt != null){
+                    pstmt.close();
+                }
+                if(con != null){
+                    con.close();
+                }
+            } catch (SQLException e) {
+            }
+        }
+        return balance;
+    }//end of getMemberBalance
+
+    // 계산후 잔액을 유저 정보에 저장하는 함수
+    public void setMemberBalance(int newBalance, String memberId) {
+        String sql = "UPDATE MEMBERS SET m_balance = ? WHERE m_id = ?";
+        Connection con = null;
+        PreparedStatement pstmt = null;
+
+        try {
+            con = DBUtil.getConnection();
+            pstmt = con.prepareStatement(sql);
+            pstmt.setInt(1, newBalance);
+            pstmt.setString(2, memberId);
+
+            int i = pstmt.executeUpdate();
+            if (i == 1) {
+                System.out.println("남은 잔액 : " + newBalance);
+            } else {
+                System.out.println("계좌이체 실패");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (pstmt != null) {
+                    pstmt.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+    } //end of setMemberBalance()
+
+    // 멤버 정보 출력
+    public void getMemberInfo(String memberId) {
+        String sql = "SELECT * FROM members WHERE m_id = ?";
+        Connection con = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        MemberVO mvo = null;
+
+        try {
+            con = DBUtil.getConnection();
+            pstmt = con.prepareStatement(sql);
+            pstmt.setString(1, memberId);
+            rs = pstmt.executeQuery();
+
+            System.out.println("No.\tID\tPW\tE-mail\t\tBalance\tTeam No.");
+
+            if(rs.next()){
+                mvo = new MemberVO();
+                mvo.setM_no(rs.getInt("m_no"));
+                mvo.setM_id(rs.getString("m_id"));
+                mvo.setM_pw(rs.getString("m_pw"));
+                mvo.setM_email(rs.getString("m_email"));
+                mvo.setM_balance(rs.getInt("m_balance"));
+                mvo.setC_no(rs.getInt("c_no"));
+            }
+            System.out.println(mvo.getM_no() + "\t" + mvo.getM_id() + "\t" + mvo.getM_pw() + "\t" + mvo.getM_email() + "\t" + mvo.getM_balance()
+            + "\t" + mvo.getC_no());   
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if(rs != null){
+                    rs.close();
+                }
+                if(pstmt != null){
+                    pstmt.close();
+                }               
+                if(con != null){
+                    con.close();
+                }
+            } catch (SQLException e) {
+            }
+        }
+    } //end of getMemberInfo()
+
+    //비밀번호 수정
+    public void changePassword(String newPW, String memberId) {
+        String sql = "UPDATE MEMBERS SET m_pw = ? WHERE m_id = ?";
+        Connection con = null;
+        PreparedStatement pstmt = null;
+
+        try {
+            con = DBUtil.getConnection();
+            pstmt = con.prepareStatement(sql);
+            pstmt.setString(1, newPW);
+            pstmt.setString(2, memberId);
+
+            int i = pstmt.executeUpdate();
+            if (i == 1) {
+                System.out.println();
+                System.out.println("Password Change Complete.");
+            } else {
+                System.out.println();
+                System.out.println("Password Change Failed.");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (pstmt != null) {
+                    pstmt.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    //멤버 아이디로 비밀번호 가져오기
+    public String getMemberPW(String memberId) {
+        String password = "";
+        String sql = "SELECT m_pw FROM MEMBERS WHERE m_id = ?";
+        Connection con = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        try {
+            con = DBUtil.getConnection();
+            pstmt = con.prepareStatement(sql);
+            pstmt.setString(1, memberId);
+            rs = pstmt.executeQuery();
+            if(rs.next()){
+                password = rs.getString("m_pw");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if(rs != null){
+                    rs.close();
+                }
+                if(pstmt != null){
+                    pstmt.close();
+                }
+                if(con != null){
+                    con.close();
+                }
+            } catch (SQLException e) {
+            }
+        }
+        return password;
+    } //end of getMemberPW()
+
+    //멤버 삭제하기
+    public void deleteMember(String memberId) {
+        String sql = "DELETE FROM MEMBERS WHERE m_id = ?";
+        Connection con = null;
+        PreparedStatement pstmt = null;
+
+        try {
+            con = DBUtil.getConnection();
+            pstmt = con.prepareStatement(sql);
+            pstmt.setString(1, memberId);
+
+            int i = pstmt.executeUpdate();
+            if (i == 1) {
+                System.out.println();
+                System.out.println(memberId + " User Delete Success");
+            } else {
+                System.out.println();
+                System.out.println("Delete Failed");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (pstmt != null) {
+                    pstmt.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+    } //end of deleteMember()
+
 } //end of class

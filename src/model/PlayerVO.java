@@ -65,6 +65,11 @@ public class PlayerVO {
     public void setC_no(int c_no) {
         this.c_no = c_no;
     }
-    
+    @Override
+    public String toString() {
+        return "Player No." + p_no + ", " + p_name + ", Back No." + p_backno + ", " + p_position
+                + ", Shoot " + p_shoot + ", Pass " + p_pass + ", Defend " + p_defend + ", Price " + p_price
+                + "M, Club No." + c_no;
+    }
 
 }

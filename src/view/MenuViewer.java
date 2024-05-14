@@ -24,14 +24,14 @@ public class MenuViewer {
         System.out.println("2. Return to Main");    //메인으로 돌아가기
         System.out.print("select >> ");
     }
-    //로그인 성공 - 유저 메뉴
+    //유저 메뉴
     public static void logInMenuView() {
         System.out.println();
         System.out.println("===== My Menu =====");
         System.out.println("Select the menu.");
         System.out.println("1. Manage My Team");    //내 팀 관리
         System.out.println("2. Transfer Market");   //이적시장
-        System.out.println("3. Modify My Account"); //내 계정 정보 수정
+        System.out.println("3. Manage My Account"); //내 계정 정보 수정
         System.out.println("4. Return to Main");    //메인으로 돌아가기
         System.out.print("select >> ");
     }
@@ -42,9 +42,9 @@ public class MenuViewer {
         System.out.println("===== Custom Menu =====");
         System.out.println("Select the menu.");
         System.out.println("1. My Player List");    //내 선수 목록
-        System.out.println("2. Delete Plater");     //내 선수 삭제
+        System.out.println("2. Release Player");     //내 선수 방출
         System.out.println("3. My Balance");        //내 잔고 확인
-        System.out.println("4. Return to Main");           //뒤로 돌아가기
+        System.out.println("4. Go Back");           //뒤로 돌아가기
         System.out.print("select >> ");
     }
 
@@ -58,7 +58,7 @@ public class MenuViewer {
         System.out.println("3. Sell Player");               //내 선수 판매
         System.out.println("4. My Player List");            //내 선수 목록
         System.out.println("5. My Balance");                //내 잔고 확인
-        System.out.println("6. Return to Main");                   //뒤로 돌아가기
+        System.out.println("6. Go Back");                   //뒤로 돌아가기
         System.out.print("select >> ");
     }
 
@@ -67,10 +67,10 @@ public class MenuViewer {
         System.out.println();
         System.out.println("===== Account Management =====");
         System.out.println("Select the menu.");
-        System.out.println("1. Show My Info");      //내 계정 정보
-        System.out.println("2. Update My Info");    //내 정보 수정
-        System.out.println("3. Delete My Account"); //계정 탈퇴
-        System.out.println("4. Return to Main");           //뒤로 돌아가기
+        System.out.println("1. Show My Info");          //내 계정 정보
+        System.out.println("2. Change My Password");    //비밀번호 수정
+        System.out.println("3. Delete My Account");     //계정 탈퇴
+        System.out.println("4. Go Back");               //뒤로 돌아가기
         System.out.print("select >> ");
     }
 
@@ -85,5 +85,6 @@ public class MenuViewer {
         System.out.println("5. Return to Main");           //뒤로 돌아가기
         System.out.print("select >> ");
     }
+
 
 }

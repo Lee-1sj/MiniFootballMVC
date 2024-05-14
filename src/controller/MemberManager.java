@@ -67,7 +67,6 @@ public class MemberManager {
     // 관리자 검증 기능
     public void verifyAdmin() {
         MemberDAO md = new MemberDAO();
-        String yesOrNo;
         String id;
         String pw;
         boolean isAdmin = false;
@@ -113,5 +112,60 @@ public class MemberManager {
         } while (!success);
         return id;
     } //end of verifyMember()
+
+    //멤버 정보 출력
+    public void showMyAccountInfo(String memberId) {
+        MemberDAO md = new MemberDAO();
+        
+        System.out.println();
+        System.out.println("=========================== My Info ===========================");
+        md.getMemberInfo(memberId);
+    } //end of showMyAccountInfo()
+
+    //비밀번호 수정
+    public void updateMyAccountPW(String memberId) {
+        MemberManager mm = new MemberManager();
+        MemberDAO md = new MemberDAO();
+        String newPW;
+        mm.showMyAccountInfo(memberId); //내 정보 출력
+        System.out.println();
+        System.out.print("Enter a new Password >> ");
+        newPW = sc.nextLine();
+        md.changePassword(newPW, memberId); //비밀번호 변경
+        mm.showMyAccountInfo(memberId); //변경한 내 정보 출력
+
+    } //end of updateMyAccountInfo()
+
+    //계정 삭제
+    public void deleteMyAccount(String memberId) {
+        MemberDAO md = new MemberDAO();
+        String id;
+        String pw;
+        String answer;
+        boolean success = false;
+
+        System.out.println("Enter the ID and PW of the Account you want to delete.");
+        System.out.print("ID >> ");
+        id = sc.nextLine();
+        System.out.print("PW >> ");
+        pw = sc.nextLine();
+        System.out.println();
+        System.out.println("Are you sure you want to delete your account?");
+        System.out.println("Press 'Y' to delete | Press any other letter to cancel");
+        System.out.print("Press >> ");
+        answer = sc.nextLine();
+
+        if(answer.equalsIgnoreCase("Y")){
+            if(id.equals(memberId) && pw.equals(md.getMemberPW(memberId))){
+                md.deleteMember(memberId);
+            } else {
+                System.out.println();
+                System.out.println("Account info does not match. Please try again later.");
+            }
+        } else {
+            System.out.println();
+            System.out.println("The delete procedure has been canceled.");
+        }
+    } //end of deleteMyAccount()
 
 }
