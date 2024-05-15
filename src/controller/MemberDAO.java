@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import model.MemberVO;
+import model.PlayerVO;
 
 public class MemberDAO {
     // new member 등록
@@ -23,7 +24,7 @@ public class MemberDAO {
             pstmt.setInt(4, mvo.getC_no());
 
             int i = pstmt.executeUpdate();
-            if(i == 1){
+            if (i == 1) {
                 System.out.println("Sign Up Complete.");
             } else {
                 System.out.println("Sing up Failed.");
@@ -32,19 +33,19 @@ public class MemberDAO {
             e.printStackTrace();
         } finally {
             try {
-                if(pstmt != null){
+                if (pstmt != null) {
                     pstmt.close();
                 }
-                if(con != null){
+                if (con != null) {
                     con.close();
-                }                
+                }
             } catch (SQLException e) {
             }
         }
 
-    } //end of setMemberRegister
+    } // end of setMemberRegister
 
-    //ID 중복 체크
+    // ID 중복 체크
     public boolean getMemberIdOverlap(String isOverlap_id) {
         String sql = "SELECT * FROM MEMBERS WHERE m_id = ?";
         Connection con = null;
@@ -56,7 +57,7 @@ public class MemberDAO {
             pstmt = con.prepareStatement(sql);
             pstmt.setString(1, isOverlap_id);
             rs = pstmt.executeQuery();
-            if(rs.next()){
+            if (rs.next()) {
                 isOverlap = true; // 아이디 중복됨
             }
         } catch (SQLException e) {
@@ -65,35 +66,35 @@ public class MemberDAO {
             e.printStackTrace();
         } finally {
             try {
-                if(rs != null){
+                if (rs != null) {
                     rs.close();
                 }
-                if(pstmt != null){
+                if (pstmt != null) {
                     pstmt.close();
-                }               
-                if(con != null){
+                }
+                if (con != null) {
                     con.close();
                 }
             } catch (SQLException e) {
             }
         }
         return isOverlap;
-    } //end of getMemberIdOverlap()
+    } // end of getMemberIdOverlap()
 
-    //email 중복 체크
+    // email 중복 체크
     public boolean getMemberEmailOverlap(String isOverlap_email) {
         String sql = "SELECT * FROM MEMBERS WHERE m_email = ?";
         Connection con = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
         boolean isOverlap = false;
-        
+
         try {
             con = DBUtil.getConnection();
             pstmt = con.prepareStatement(sql);
             pstmt.setString(1, isOverlap_email);
             rs = pstmt.executeQuery();
-            if(rs.next()){
+            if (rs.next()) {
                 isOverlap = true; // email 중복됨
             }
         } catch (SQLException e) {
@@ -102,20 +103,20 @@ public class MemberDAO {
             e.printStackTrace();
         } finally {
             try {
-                if(rs != null){
+                if (rs != null) {
                     rs.close();
                 }
-                if(pstmt != null){
+                if (pstmt != null) {
                     pstmt.close();
-                }               
-                if(con != null){
+                }
+                if (con != null) {
                     con.close();
                 }
             } catch (SQLException e) {
             }
         }
         return isOverlap;
-    } //end of getMemberEmailOverlap()
+    } // end of getMemberEmailOverlap()
 
     // 멤버객체 하나 불러오기 (id, pw 이용)
     public void getMember(String id, String pw) {
@@ -134,7 +135,7 @@ public class MemberDAO {
 
             System.out.println("No.\tID\t\tE-mail\t\tBalance\t\tTeam No.");
 
-            if(rs.next()){
+            if (rs.next()) {
                 mvo = new MemberVO();
                 mvo.setM_no(rs.getInt("m_no"));
                 mvo.setM_id(rs.getString("m_id"));
@@ -142,8 +143,9 @@ public class MemberDAO {
                 mvo.setM_balance(rs.getInt("m_balance"));
                 mvo.setC_no(rs.getInt("c_no"));
 
-                System.out.println(mvo.getM_no() + "\t" + mvo.getM_id() + "\t\t" + mvo.getM_email() + "\t" + mvo.getM_balance()
-                + "\t\t" + mvo.getC_no());              
+                System.out.println(
+                        mvo.getM_no() + "\t" + mvo.getM_id() + "\t\t" + mvo.getM_email() + "\t" + mvo.getM_balance()
+                                + "\t\t" + mvo.getC_no());
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -151,21 +153,21 @@ public class MemberDAO {
             e.printStackTrace();
         } finally {
             try {
-                if(rs != null){
+                if (rs != null) {
                     rs.close();
                 }
-                if(pstmt != null){
+                if (pstmt != null) {
                     pstmt.close();
-                }               
-                if(con != null){
+                }
+                if (con != null) {
                     con.close();
                 }
             } catch (SQLException e) {
             }
         }
-    } //end of getMember()
+    } // end of getMember()
 
-    //로그인 기능
+    // 로그인 기능
     public boolean getMemberLogin(String id, String pw) {
         String sql = "SELECT * FROM members WHERE m_id = ? AND m_pw = ?";
         Connection con = null;
@@ -179,7 +181,7 @@ public class MemberDAO {
             pstmt.setString(2, pw);
             rs = pstmt.executeQuery();
 
-            if(rs.next()){
+            if (rs.next()) {
                 System.out.println("login success.");
                 loginSuccess = true;
             }
@@ -189,22 +191,22 @@ public class MemberDAO {
             e.printStackTrace();
         } finally {
             try {
-                if(rs != null){
+                if (rs != null) {
                     rs.close();
                 }
-                if(pstmt != null){
+                if (pstmt != null) {
                     pstmt.close();
-                }               
-                if(con != null){
+                }
+                if (con != null) {
                     con.close();
                 }
             } catch (SQLException e) {
             }
         }
         return loginSuccess;
-    } //end of getMemberLogin()
+    } // end of getMemberLogin()
 
-    //관리자 로그인 기능
+    // 관리자 로그인 기능
     public boolean getAdminLogin(String id, String pw) {
         String sql = "SELECT m_isadmin FROM MEMBERS WHERE m_id = ? AND m_pw = ?";
         Connection con = null;
@@ -219,9 +221,9 @@ public class MemberDAO {
             pstmt.setString(2, pw);
             rs = pstmt.executeQuery();
 
-            if(rs.next()){
+            if (rs.next()) {
                 verify = rs.getInt("m_isadmin");
-                if(verify == 1){
+                if (verify == 1) {
                     System.out.println();
                     System.out.println("Admin mode success");
                     loginSuccess = true;
@@ -239,13 +241,13 @@ public class MemberDAO {
             e.printStackTrace();
         } finally {
             try {
-                if(rs != null){
+                if (rs != null) {
                     rs.close();
                 }
-                if(pstmt != null){
+                if (pstmt != null) {
                     pstmt.close();
-                }               
-                if(con != null){
+                }
+                if (con != null) {
                     con.close();
                 }
             } catch (SQLException e) {
@@ -253,7 +255,7 @@ public class MemberDAO {
         }
         return loginSuccess;
 
-    } //end of getAdminLogin()
+    } // end of getAdminLogin()
 
     // memberId를 가지고 db를 찾아서 m_no를 불러옴
     public int getMemberNum(String memberId) {
@@ -269,7 +271,7 @@ public class MemberDAO {
             pstmt = con.prepareStatement(sql);
             pstmt.setString(1, memberId);
             rs = pstmt.executeQuery();
-            if(rs.next()){
+            if (rs.next()) {
                 m_no = rs.getInt("m_no");
             }
         } catch (SQLException e) {
@@ -278,13 +280,13 @@ public class MemberDAO {
             e.printStackTrace();
         } finally {
             try {
-                if(rs != null){
+                if (rs != null) {
                     rs.close();
                 }
-                if(pstmt != null){
+                if (pstmt != null) {
                     pstmt.close();
                 }
-                if(con != null){
+                if (con != null) {
                     con.close();
                 }
             } catch (SQLException e) {
@@ -293,7 +295,7 @@ public class MemberDAO {
         return m_no;
     }
 
-    //로그인한 id로 멤버의 잔액 조회하는 함수
+    // 로그인한 id로 멤버의 잔액 조회하는 함수
     public int getMemberBalance(String memberId) {
         int balance = 0;
         String sql = "SELECT m_balance FROM MEMBERS WHERE m_id = ?";
@@ -307,7 +309,7 @@ public class MemberDAO {
             pstmt = con.prepareStatement(sql);
             pstmt.setString(1, memberId);
             rs = pstmt.executeQuery();
-            if(rs.next()){
+            if (rs.next()) {
                 balance = rs.getInt("m_balance");
             }
         } catch (SQLException e) {
@@ -316,20 +318,20 @@ public class MemberDAO {
             e.printStackTrace();
         } finally {
             try {
-                if(rs != null){
+                if (rs != null) {
                     rs.close();
                 }
-                if(pstmt != null){
+                if (pstmt != null) {
                     pstmt.close();
                 }
-                if(con != null){
+                if (con != null) {
                     con.close();
                 }
             } catch (SQLException e) {
             }
         }
         return balance;
-    }//end of getMemberBalance
+    }// end of getMemberBalance
 
     // 계산후 잔액을 유저 정보에 저장하는 함수
     public void setMemberBalance(int newBalance, String memberId) {
@@ -345,6 +347,7 @@ public class MemberDAO {
 
             int i = pstmt.executeUpdate();
             if (i == 1) {
+                System.out.println();
                 System.out.println("남은 잔액 : " + newBalance);
             } else {
                 System.out.println("계좌이체 실패");
@@ -366,7 +369,7 @@ public class MemberDAO {
             }
         }
 
-    } //end of setMemberBalance()
+    } // end of setMemberBalance()
 
     // 멤버 정보 출력
     public void getMemberInfo(String memberId) {
@@ -384,7 +387,7 @@ public class MemberDAO {
 
             System.out.println("No.\tID\tPW\tE-mail\t\tBalance\tTeam No.");
 
-            if(rs.next()){
+            if (rs.next()) {
                 mvo = new MemberVO();
                 mvo.setM_no(rs.getInt("m_no"));
                 mvo.setM_id(rs.getString("m_id"));
@@ -393,29 +396,30 @@ public class MemberDAO {
                 mvo.setM_balance(rs.getInt("m_balance"));
                 mvo.setC_no(rs.getInt("c_no"));
             }
-            System.out.println(mvo.getM_no() + "\t" + mvo.getM_id() + "\t" + mvo.getM_pw() + "\t" + mvo.getM_email() + "\t" + mvo.getM_balance()
-            + "\t" + mvo.getC_no());   
+            System.out.println(mvo.getM_no() + "\t" + mvo.getM_id() + "\t" + mvo.getM_pw() + "\t" + mvo.getM_email()
+                    + "\t" + mvo.getM_balance()
+                    + "\t" + mvo.getC_no());
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
             try {
-                if(rs != null){
+                if (rs != null) {
                     rs.close();
                 }
-                if(pstmt != null){
+                if (pstmt != null) {
                     pstmt.close();
-                }               
-                if(con != null){
+                }
+                if (con != null) {
                     con.close();
                 }
             } catch (SQLException e) {
             }
         }
-    } //end of getMemberInfo()
+    } // end of getMemberInfo()
 
-    //비밀번호 수정
+    // 비밀번호 수정
     public void changePassword(String newPW, String memberId) {
         String sql = "UPDATE MEMBERS SET m_pw = ? WHERE m_id = ?";
         Connection con = null;
@@ -453,7 +457,7 @@ public class MemberDAO {
         }
     }
 
-    //멤버 아이디로 비밀번호 가져오기
+    // 멤버 아이디로 비밀번호 가져오기
     public String getMemberPW(String memberId) {
         String password = "";
         String sql = "SELECT m_pw FROM MEMBERS WHERE m_id = ?";
@@ -466,7 +470,7 @@ public class MemberDAO {
             pstmt = con.prepareStatement(sql);
             pstmt.setString(1, memberId);
             rs = pstmt.executeQuery();
-            if(rs.next()){
+            if (rs.next()) {
                 password = rs.getString("m_pw");
             }
         } catch (SQLException e) {
@@ -475,22 +479,22 @@ public class MemberDAO {
             e.printStackTrace();
         } finally {
             try {
-                if(rs != null){
+                if (rs != null) {
                     rs.close();
                 }
-                if(pstmt != null){
+                if (pstmt != null) {
                     pstmt.close();
                 }
-                if(con != null){
+                if (con != null) {
                     con.close();
                 }
             } catch (SQLException e) {
             }
         }
         return password;
-    } //end of getMemberPW()
+    } // end of getMemberPW()
 
-    //멤버 삭제하기
+    // 멤버 삭제하기
     public void deleteMember(String memberId) {
         String sql = "DELETE FROM MEMBERS WHERE m_id = ?";
         Connection con = null;
@@ -526,6 +530,59 @@ public class MemberDAO {
             }
         }
 
-    } //end of deleteMember()
+    } // end of deleteMember()
 
-} //end of class
+    // 관리자권한으로 모든 멤버 정보 출력
+    public void getMembers() {
+        String sql = "SELECT * FROM MEMBERS ORDER BY m_no";
+        Connection con = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        MemberVO mvo;
+
+        try {
+            con = DBUtil.getConnection();
+            pstmt = con.prepareStatement(sql);
+            rs = pstmt.executeQuery();
+
+            System.out.println();
+            System.out.println(String.format("%-12s %-15s %-15s %-25s %-15s %-15s %-15s", "MEMBER NO.",
+                    "MEMBER ID", "MEMBER PW", "MEMBER E-MAIL", "AUTHORITY", "BALANCE", "CLUB NO."));
+
+            while (rs.next()) {
+                mvo = new MemberVO();
+                mvo.setM_no(rs.getInt("m_no"));
+                mvo.setM_id(rs.getString("m_id"));
+                mvo.setM_pw(rs.getString("m_pw"));
+                mvo.setM_email(rs.getString("m_email"));
+                mvo.setM_isAdmin(rs.getInt("m_isadmin"));
+                mvo.setM_balance(rs.getInt("m_balance"));
+                mvo.setC_no(rs.getInt("c_no"));
+
+                System.out.println(String.format("%-12s %-15s %-15s %-25s %-15s %-15s %-15s", mvo.getM_no(),
+                        mvo.getM_id(), mvo.getM_pw(), mvo.getM_email(), mvo.getM_isAdmin(), mvo.getM_balance(),
+                        mvo.getC_no()));
+
+            }
+        } catch (SQLException se) {
+            System.out.println(se);
+        } catch (Exception e) {
+            System.out.println(e);
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (pstmt != null) {
+                    pstmt.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException se) {
+            }
+        }
+
+    } // end of getMembers()
+
+} // end of class

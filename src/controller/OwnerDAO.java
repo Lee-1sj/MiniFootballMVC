@@ -140,8 +140,10 @@ public class OwnerDAO {
 
             int i = pstmt.executeUpdate();
             if (i == 1) {
+                System.out.println();
                 System.out.println(p_no + ". Player Delete Success");
             } else {
+                System.out.println();
                 System.out.println("Delete Failed");
             }
         } catch (SQLException e) {

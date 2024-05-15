@@ -21,6 +21,7 @@ public class ClubDAO {
             pstmt = con.prepareStatement(sql);
             rs = pstmt.executeQuery();
 
+            System.out.println();
             System.out.println("CLUB NO\t\tCLUB NAME");
 
             while (rs.next()) {
@@ -48,5 +49,77 @@ public class ClubDAO {
             }
         }
     } //end of getClubTotalList()
+
+
+    //새 클럽 추가
+    public void createNewClub(String c_name) {
+        String sql = "INSERT INTO CLUB VALUES (CLUB_SEQ.NEXTVAL, ?)";
+        Connection con = null;
+        PreparedStatement pstmt = null;
+
+        try {
+            con = DBUtil.getConnection();
+            pstmt = con.prepareStatement(sql);
+            pstmt.setString(1, c_name);
+
+            int i = pstmt.executeUpdate();
+            if(i == 1){
+                System.out.println();
+                System.out.println(c_name + "Create Complete.");
+            } else {
+                System.out.println();
+                System.out.println("Create Failed.");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if(pstmt != null){
+                    pstmt.close();
+                }
+                if(con != null){
+                    con.close();
+                }                
+            } catch (SQLException e) {
+            }
+        }
+    } //end of createNewClub
+
+    // 클럽 삭제
+    public void eliminateClub(String c_name) {
+        String sql = "DELETE FROM CLUB WHERE c_name = ?";
+        Connection con = null;
+        PreparedStatement pstmt = null;
+
+        try {
+            con = DBUtil.getConnection();
+            pstmt = con.prepareStatement(sql);
+            pstmt.setString(1, c_name);
+
+            int i = pstmt.executeUpdate();
+            if (i == 1) {
+                System.out.println();
+                System.out.println(c_name + " Delete Success");
+            } else {
+                System.out.println();
+                System.out.println("Delete Failed");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (pstmt != null) {
+                    pstmt.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    } //end of eliminateClub()
 
 }

@@ -1,5 +1,5 @@
-import java.util.Scanner;
-
+import controller.ClubDAO;
+import controller.ClubManager;
 import controller.MemberDAO;
 import controller.MemberManager;
 import controller.OwnerManager;
@@ -29,16 +29,16 @@ public class MiniFootballMain {
                 MenuViewer.choice.nextLine();
 
                 switch (choiceNum) {
-                    case MENU_CHOICE.SIGN:
+                    case MENU_CHOICE.SIGN:  //1. 회원가입
                         signUpMenu();
                         break;
-                    case MENU_CHOICE.LOGIN:
+                    case MENU_CHOICE.LOGIN: //2. 로그인
                         logInMenu();
                         break;
-                    case MENU_CHOICE.ADMIN:
+                    case MENU_CHOICE.ADMIN: //3. 관리자
                         adminMenu();
                         break;
-                    case MENU_CHOICE.EXIT:
+                    case MENU_CHOICE.EXIT:  //4. 종료
                         System.out.println("Exit the program.");
                         return;
                     default:
@@ -56,6 +56,11 @@ public class MiniFootballMain {
     // 관리자 메뉴
     public static void adminMenu() {
         int choice;
+        ClubDAO cd = new ClubDAO();
+        ClubManager cm = new ClubManager();
+        PlayerDAO pd = new PlayerDAO(); 
+        PlayerManager pm  = new PlayerManager();
+        MemberDAO md = new MemberDAO();
         MemberManager mm = new MemberManager();
         mm.verifyAdmin(); //관리자 검증
         // 관리자 메뉴 출력
@@ -65,15 +70,28 @@ public class MiniFootballMain {
             choice = MenuViewer.choice.nextInt();
             MenuViewer.choice.nextLine();
             switch (choice) {
-                case ADMIN_CHOICE.CREATE:       //팀 추가
+                case ADMIN_CHOICE.CREATE:       //1. 팀 추가
+                    cm.createClub();
                     break;
-                case ADMIN_CHOICE.DELETE:       //팀 삭제
+                case ADMIN_CHOICE.DELETE:       //2. 팀 삭제
+                    cm.deleteClub();
                     break;
-                case ADMIN_CHOICE.MAKE:         //선수 추가
+                case ADMIN_CHOICE.MAKE:         //3. 선수 추가
+                    pm.createPlayer();
                     break;
-                case ADMIN_CHOICE.ELIMINATE:    //선수 삭제
+                case ADMIN_CHOICE.ELIMINATE:    //4. 선수 삭제
+                    pm.deletePlayer();
                     break;
-                case ADMIN_CHOICE.MAIN:         //메인
+                case ADMIN_CHOICE.CLUBLIST:     //5. 클럽 목록
+                    cd.getClubTotalList();
+                    break;
+                case ADMIN_CHOICE.PLIST:        //6. 선수 목록
+                    pd.getPlayerFromMarket();
+                    break;
+                case ADMIN_CHOICE.MLIST:    //7. 멤버 목록
+                    md.getMembers();
+                    break;
+                case ADMIN_CHOICE.MAIN:         //8. 메인
                     return;
                 default:
                     System.out.println("Please only enter the appropriate menu number.");
@@ -133,6 +151,7 @@ public class MiniFootballMain {
                     break;
                 case CUSTOM_CHOICE.BALANCE:     //잔고 확인
                     int balance = md.getMemberBalance(memberId);
+                    System.out.println();
                     System.out.println("Your balance is : " + balance + " M");
                     break;
                 case CUSTOM_CHOICE.BACK:        //뒤로 가기
@@ -171,6 +190,7 @@ public class MiniFootballMain {
                     break;
                 case TRANSFER_CHOICE.BALANCE:   //잔고확인
                     int balance = md.getMemberBalance(memberId);
+                    System.out.println();
                     System.out.println("Your balance is : " + balance + " M");
                     break;
                 case TRANSFER_CHOICE.BACK:      //뒤로 가기

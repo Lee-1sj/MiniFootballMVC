@@ -15,12 +15,14 @@ public class OwnerManager {
         PlayerVO pvo = new PlayerVO();
         
         System.out.println();
-        System.out.println("List of My Players");
+        System.out.println("<List of My Players>");
         list = od.getMemberPlayerList(memberId);
         if(list.isEmpty()){
+            System.out.println();
             System.out.println("There are no players in possession.");
         } else {
             for(PlayerVO data : list){
+                System.out.println();
                 System.out.println(data.toString());
             }
         }
@@ -47,6 +49,7 @@ public class OwnerManager {
             md.setMemberBalance(newBalance, memberId); // 계산 후 잔액을 저장
             od.savePlayerMember(p_no, memberId); //맵핑 테이블에 해당 정보 저장
         } else { //잔액 부족
+            System.out.println();
             System.out.println("Payment failed due to insufficient balance.");
         }
     
@@ -88,6 +91,7 @@ public class OwnerManager {
         sc.nextLine();
         
         od.deletePlayerMember(p_no, memberId); //선택한 선수 삭제
+        System.out.println();
         System.out.println(p_no + " Player Release Success.");
 
     } //end of releasePlayerMember()

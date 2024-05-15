@@ -82,9 +82,12 @@ public class MenuViewer {
         System.out.println("2. Delete Club");       //클럽 삭제
         System.out.println("3. Create Player");     //선수 추가
         System.out.println("4. Delete Player");     //선수 삭제
-        System.out.println("5. Return to Main");           //뒤로 돌아가기
+        System.out.println("5. Show Club List");     //클럽 목록
+        System.out.println("6. Show Player List");     //선수 목록
+        System.out.println("7. Show Member List");     //멤버 목록
+        System.out.println("8. Return to Main");    //뒤로 돌아가기
         System.out.print("select >> ");
     }
-
+    
 
 }
