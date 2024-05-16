@@ -27,7 +27,7 @@ public class MemberManager {
             // id 중복체크
             id_check = md.getMemberIdOverlap(m_id);
             if(id_check){
-                System.out.println("This is a duplicate ID. Please re-enter it.");
+                System.out.println("This is a duplicate ID. Please re-enter it."); //id 중복 시 출력문
             }
         } while (id_check);
         // pw 입력
@@ -40,7 +40,7 @@ public class MemberManager {
             // email 중복체크
             email_check = md.getMemberEmailOverlap(m_email);
             if(email_check){
-                System.out.println("This is a duplicate Email. Please re-enter it.");
+                System.out.println("This is a duplicate Email. Please re-enter it."); //email 중복 시 출력문
             }
         } while (email_check);
         
@@ -59,7 +59,7 @@ public class MemberManager {
         // 가입 회원 정보 출력
         System.out.println();
         System.out.println("=====New Member Info======");
-        md.getMember(mvo.getM_id(), mvo.getM_pw());
+        md.getMember(mvo.getM_id(), mvo.getM_pw()); // 가입한 member 객체만 불러서 정보 출력
         System.out.println();
 
     } //end of singUpMember()
@@ -91,7 +91,6 @@ public class MemberManager {
     //로그인 검증 기능
     public String verifyMember() {
         MemberDAO md = new MemberDAO();
-        String yesOrNo;
         String id;
         String pw;
         boolean success = false;
@@ -104,7 +103,7 @@ public class MemberManager {
             System.out.print("Input PW >> ");
             pw = sc.nextLine();
 
-            success = md.getMemberLogin(id, pw);
+            success = md.getMemberLogin(id, pw); //입력받은 값 두 개로 db에서 찾음
             if (!success) {
                 System.out.println("The account information is not valid. Please re-enter.");
                 System.out.println();

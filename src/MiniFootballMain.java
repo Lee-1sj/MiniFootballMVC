@@ -103,7 +103,7 @@ public class MiniFootballMain {
     public static void logInMenu() {
         MemberManager mm = new MemberManager();
         int choice;
-        String memberId = mm.verifyMember();  //로그인 검증
+        String memberId = mm.verifyMember();  //로그인 검증 > memberId를 키값으로 사용하기 위해 리턴
 
         // 유저 메뉴 출력
         
@@ -241,11 +241,11 @@ public class MiniFootballMain {
             choice = MenuViewer.choice.nextInt();
             MenuViewer.choice.nextLine();
             switch (choice) {
-                case SIGN_CHOICE.SIGN:
+                case SIGN_CHOICE.SIGN:      //1. 회원가입
                     System.out.println();
                     mm.signUpMember();
                     return;
-                case SIGN_CHOICE.MAIN:
+                case SIGN_CHOICE.MAIN:      //2. 메인으로 돌아가기
                     return;
                 default:
                     System.out.println("Please only enter the appropriate menu number.");

@@ -79,7 +79,7 @@ public class OwnerDAO {
         }
     }//end of savePlayerMember()
 
-    //오너테이블에서 멤버의 보유 선수 list
+    //오너테이블에서 멤버의 보유 선수 list > 객체를 ArrayList에 저장해서 리턴함
     public ArrayList<PlayerVO> getMemberPlayerList(String memberId) {
         ArrayList<PlayerVO> memberPlayerList = null;
         String sql = "SELECT P.p_no, P.p_name, P.p_backno, P.p_position, P.p_shoot, P.p_pass, P.p_defend, P.p_price, P.c_no FROM OWNER O INNER JOIN PLAYER P ON O.p_no = P.p_no WHERE m_no = (SELECT m_no FROM MEMBERS WHERE m_id = ?)";

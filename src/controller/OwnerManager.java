@@ -12,18 +12,16 @@ public class OwnerManager {
     public void showMyPlayers(String memberId) {
         ArrayList<PlayerVO> list = new ArrayList<>();
         OwnerDAO od = new OwnerDAO();
-        PlayerVO pvo = new PlayerVO();
         
         System.out.println();
         System.out.println("<List of My Players>");
         list = od.getMemberPlayerList(memberId);
         if(list.isEmpty()){
             System.out.println();
-            System.out.println("There are no players in possession.");
+            System.out.println("There are no players in possession."); //list가 비어있으면
         } else {
             for(PlayerVO data : list){
-                System.out.println();
-                System.out.println(data.toString());
+                System.out.println(data.toString()); //출력
             }
         }
     } //end of showMyPlayers()
@@ -48,7 +46,7 @@ public class OwnerManager {
             int newBalance = memberBalance - playerPrice;
             md.setMemberBalance(newBalance, memberId); // 계산 후 잔액을 저장
             od.savePlayerMember(p_no, memberId); //맵핑 테이블에 해당 정보 저장
-        } else { //잔액 부족
+        } else {    //잔액 부족
             System.out.println();
             System.out.println("Payment failed due to insufficient balance.");
         }
