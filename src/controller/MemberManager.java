@@ -79,7 +79,7 @@ public class MemberManager {
             System.out.print("Input Admin PW >> ");
             pw = sc.nextLine();
             
-            isAdmin = md.getAdminLogin(id, pw);
+            isAdmin = md.getAdminLogin(id, pw); //검증
             if (!isAdmin) {
                 System.out.println("The Admin account is not valid. Please re-enter.");
                 System.out.println();

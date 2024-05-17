@@ -251,8 +251,6 @@ public class MiniFootballMain {
                     System.out.println("Please only enter the appropriate menu number.");
             } // end of switch
         }
-
-
     } // end of signUpMenu()
 
 } // end of class

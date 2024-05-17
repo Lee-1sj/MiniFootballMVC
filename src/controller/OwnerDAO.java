@@ -9,43 +9,6 @@ import java.util.ArrayList;
 import model.PlayerVO;
 
 public class OwnerDAO {
-
-    public int getPlayerNum(int m_no) {
-        String sql = "SELECT * FROM owner o INNER JOIN player p ON  o.p_no = p.p_no WHERE m_no = ?";
-        int p_no = -1;
-        Connection con = null;
-        PreparedStatement pstmt = null;
-        ResultSet rs = null;
-
-        try {
-            con = DBUtil.getConnection();
-            pstmt = con.prepareStatement(sql);
-            pstmt.setInt(1, m_no);
-            rs = pstmt.executeQuery();
-            if(rs.next()) {
-                p_no = rs.getInt("p_no");
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if(rs != null){
-                    rs.close();
-                }
-                if(pstmt != null){
-                    pstmt.close();
-                }
-                if(con != null){
-                    con.close();
-                }
-            } catch (SQLException e) {
-            }
-        }
-        return p_no;
-    } //end of getMyPlayers()
-
     //구매한 선수와 멤버를 맵핑테이블에 저장
     public void savePlayerMember(int p_no, String memberId) {
         String sql = "INSERT INTO OWNER VALUES (OWNER_SEQ.NEXTVAL, (select m_no from members where m_id = ?), ?)";
@@ -162,8 +125,6 @@ public class OwnerDAO {
                 e.printStackTrace();
             }
         }
-
-
     }//end of deletePlayerMember()
 
 }
