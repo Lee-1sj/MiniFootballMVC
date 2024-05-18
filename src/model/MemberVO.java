@@ -1,14 +1,14 @@
 package model;
 
 public class MemberVO {
-    private int m_no;       //멤버 일련번호
-    private String m_id;    //멤버 id
-    private String m_pw;    //멤버 pw
-    private String m_email; //멤버 email
-    private int m_isAdmin;  //관리자 권한 여부
-    private int m_balance;  //멤버 잔고
-    private int c_no;       //팀 일련번호
-    
+    private int m_no; // 멤버 일련번호
+    private String m_id; // 멤버 id
+    private String m_pw; // 멤버 pw
+    private String m_email; // 멤버 email
+    private int m_isAdmin; // 관리자 권한 여부
+    private int m_balance; // 멤버 잔고
+    private int c_no; // 팀 일련번호
+
     public MemberVO() {
     }
 
@@ -77,6 +77,5 @@ public class MemberVO {
     public void setC_no(int c_no) {
         this.c_no = c_no;
     }
-
 
 }

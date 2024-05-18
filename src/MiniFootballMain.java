@@ -29,16 +29,16 @@ public class MiniFootballMain {
                 MenuViewer.choice.nextLine();
 
                 switch (choiceNum) {
-                    case MENU_CHOICE.SIGN:  //1. 회원가입
+                    case MENU_CHOICE.SIGN: // 1. 회원가입
                         signUpMenu();
                         break;
-                    case MENU_CHOICE.LOGIN: //2. 로그인
+                    case MENU_CHOICE.LOGIN: // 2. 로그인
                         logInMenu();
                         break;
-                    case MENU_CHOICE.ADMIN: //3. 관리자
+                    case MENU_CHOICE.ADMIN: // 3. 관리자
                         adminMenu();
                         break;
-                    case MENU_CHOICE.EXIT:  //4. 종료
+                    case MENU_CHOICE.EXIT: // 4. 종료
                         System.out.println("Exit the program.");
                         return;
                     default:
@@ -51,63 +51,62 @@ public class MiniFootballMain {
             }
         } // end of while
     } // end of mainMenu()
-    
-    
+
     // 관리자 메뉴
     public static void adminMenu() {
         int choice;
         ClubDAO cd = new ClubDAO();
         ClubManager cm = new ClubManager();
-        PlayerDAO pd = new PlayerDAO(); 
-        PlayerManager pm  = new PlayerManager();
+        PlayerDAO pd = new PlayerDAO();
+        PlayerManager pm = new PlayerManager();
         MemberDAO md = new MemberDAO();
         MemberManager mm = new MemberManager();
-        mm.verifyAdmin(); //관리자 검증
+        mm.verifyAdmin(); // 관리자 검증
         // 관리자 메뉴 출력
-        
-        while(true){
+
+        while (true) {
             MenuViewer.adminMenuView();
             choice = MenuViewer.choice.nextInt();
             MenuViewer.choice.nextLine();
             switch (choice) {
-                case ADMIN_CHOICE.CREATE:       //1. 팀 추가
+                case ADMIN_CHOICE.CREATE: // 1. 팀 추가
                     cm.createClub();
                     break;
-                case ADMIN_CHOICE.DELETE:       //2. 팀 삭제
+                case ADMIN_CHOICE.DELETE: // 2. 팀 삭제
                     cm.deleteClub();
                     break;
-                case ADMIN_CHOICE.MAKE:         //3. 선수 추가
+                case ADMIN_CHOICE.MAKE: // 3. 선수 추가
                     pm.createPlayer();
                     break;
-                case ADMIN_CHOICE.ELIMINATE:    //4. 선수 삭제
+                case ADMIN_CHOICE.ELIMINATE: // 4. 선수 삭제
                     pm.deletePlayer();
                     break;
-                case ADMIN_CHOICE.CLUBLIST:     //5. 클럽 목록
+                case ADMIN_CHOICE.CLUBLIST: // 5. 클럽 목록
                     cd.getClubTotalList();
                     break;
-                case ADMIN_CHOICE.PLIST:        //6. 선수 목록
+                case ADMIN_CHOICE.PLIST: // 6. 선수 목록
                     pd.getPlayerFromMarket();
                     break;
-                case ADMIN_CHOICE.MLIST:    //7. 멤버 목록
+                case ADMIN_CHOICE.MLIST: // 7. 멤버 목록
                     md.getMembers();
                     break;
-                case ADMIN_CHOICE.MAIN:         //8. 메인
+                case ADMIN_CHOICE.MAIN: // 8. 메인
                     return;
                 default:
                     System.out.println("Please only enter the appropriate menu number.");
             }
         }
-    } //end of adminMenu()
+    } // end of adminMenu()
 
     // 로그인 메뉴
     public static void logInMenu() {
         MemberManager mm = new MemberManager();
         int choice;
-        String memberId = mm.verifyMember();  //로그인 검증 > memberId를 키값으로 사용하기 위해 리턴
+        String memberId = mm.verifyMember(); // 로그인 검증 > memberId를 키값으로 사용하기 위해 리턴
 
         // 유저 메뉴 출력
-        
-        while(true){
+
+        while (true) {
             MenuViewer.logInMenuView();
             choice = MenuViewer.choice.nextInt();
             MenuViewer.choice.nextLine();
@@ -137,24 +136,24 @@ public class MiniFootballMain {
         MemberDAO md = new MemberDAO();
         PlayerDAO pd = new PlayerDAO();
         boolean exitFlag = false;
-        
-        while(!exitFlag){
+
+        while (!exitFlag) {
             MenuViewer.customMenuView();
             choice = MenuViewer.choice.nextInt();
             MenuViewer.choice.nextLine();
             switch (choice) {
-                case CUSTOM_CHOICE.LIST:        //내 팀 선수 목록
+                case CUSTOM_CHOICE.LIST: // 내 팀 선수 목록
                     om.showMyPlayers(memberId);
                     break;
-                case CUSTOM_CHOICE.DELETE:      //내 팀 선수 방출
+                case CUSTOM_CHOICE.DELETE: // 내 팀 선수 방출
                     om.releasePlayerMember(memberId);
                     break;
-                case CUSTOM_CHOICE.BALANCE:     //잔고 확인
+                case CUSTOM_CHOICE.BALANCE: // 잔고 확인
                     int balance = md.getMemberBalance(memberId);
                     System.out.println();
                     System.out.println("Your balance is : " + balance + " M");
                     break;
-                case CUSTOM_CHOICE.BACK:        //뒤로 가기
+                case CUSTOM_CHOICE.BACK: // 뒤로 가기
                     exitFlag = true;
                     break;
                 default:
@@ -170,30 +169,30 @@ public class MiniFootballMain {
         PlayerDAO pd = new PlayerDAO();
         OwnerManager om = new OwnerManager();
         MemberDAO md = new MemberDAO();
-        
-        while(true){
+
+        while (true) {
             MenuViewer.transferMenuView();
             choice = MenuViewer.choice.nextInt();
             MenuViewer.choice.nextLine();
             switch (choice) {
-                case TRANSFER_CHOICE.LIST:      //이적시장 선수목록
+                case TRANSFER_CHOICE.LIST: // 이적시장 선수목록
                     pd.getPlayerFromMarket();
                     break;
-                case TRANSFER_CHOICE.BUY:       //이적시장 선수구매
+                case TRANSFER_CHOICE.BUY: // 이적시장 선수구매
                     om.buyPlayerFromMarket(memberId);
                     break;
-                case TRANSFER_CHOICE.SELL:      //이적시장 선수판매
+                case TRANSFER_CHOICE.SELL: // 이적시장 선수판매
                     om.sellPlayerFromMarket(memberId);
                     break;
-                case TRANSFER_CHOICE.MYLIST:    //보유한 선수목록
+                case TRANSFER_CHOICE.MYLIST: // 보유한 선수목록
                     om.showMyPlayers(memberId);
                     break;
-                case TRANSFER_CHOICE.BALANCE:   //잔고확인
+                case TRANSFER_CHOICE.BALANCE: // 잔고확인
                     int balance = md.getMemberBalance(memberId);
                     System.out.println();
                     System.out.println("Your balance is : " + balance + " M");
                     break;
-                case TRANSFER_CHOICE.BACK:      //뒤로 가기
+                case TRANSFER_CHOICE.BACK: // 뒤로 가기
                     return;
                 default:
                     System.out.println("Please only enter the appropriate menu number.");
@@ -206,8 +205,8 @@ public class MiniFootballMain {
     public static void memberMenu(String memberId) {
         int choice;
         MemberManager mm = new MemberManager();
-        
-        while(true){
+
+        while (true) {
             MenuViewer.memberMenuView();
             choice = MenuViewer.choice.nextInt();
             MenuViewer.choice.nextLine();
@@ -228,24 +227,23 @@ public class MiniFootballMain {
             } // end of switch
         }
 
-
     } // end of memberMenu()
 
     // 회원가입 메뉴
     public static void signUpMenu() {
         int choice;
         MemberManager mm = new MemberManager();
-        
-        while(true){
+
+        while (true) {
             MenuViewer.signUpMenuView();
             choice = MenuViewer.choice.nextInt();
             MenuViewer.choice.nextLine();
             switch (choice) {
-                case SIGN_CHOICE.SIGN:      //1. 회원가입
+                case SIGN_CHOICE.SIGN: // 1. 회원가입
                     System.out.println();
                     mm.signUpMember();
                     return;
-                case SIGN_CHOICE.MAIN:      //2. 메인으로 돌아가기
+                case SIGN_CHOICE.MAIN: // 2. 메인으로 돌아가기
                     return;
                 default:
                     System.out.println("Please only enter the appropriate menu number.");

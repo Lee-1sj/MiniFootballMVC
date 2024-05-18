@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import model.MemberVO;
-import model.PlayerVO;
 
 public class MemberDAO {
     // new member 등록
@@ -40,6 +39,7 @@ public class MemberDAO {
                     con.close();
                 }
             } catch (SQLException e) {
+                e.printStackTrace();
             }
         }
 
@@ -76,6 +76,7 @@ public class MemberDAO {
                     con.close();
                 }
             } catch (SQLException e) {
+                e.printStackTrace();
             }
         }
         return isOverlap;
@@ -113,6 +114,7 @@ public class MemberDAO {
                     con.close();
                 }
             } catch (SQLException e) {
+                e.printStackTrace();
             }
         }
         return isOverlap;
@@ -163,6 +165,7 @@ public class MemberDAO {
                     con.close();
                 }
             } catch (SQLException e) {
+                e.printStackTrace();
             }
         }
     } // end of getMember()
@@ -201,6 +204,7 @@ public class MemberDAO {
                     con.close();
                 }
             } catch (SQLException e) {
+                e.printStackTrace();
             }
         }
         return loginSuccess;
@@ -251,6 +255,7 @@ public class MemberDAO {
                     con.close();
                 }
             } catch (SQLException e) {
+                e.printStackTrace();
             }
         }
         return loginSuccess;
@@ -290,6 +295,7 @@ public class MemberDAO {
                     con.close();
                 }
             } catch (SQLException e) {
+                e.printStackTrace();
             }
         }
         return m_no;
@@ -328,6 +334,7 @@ public class MemberDAO {
                     con.close();
                 }
             } catch (SQLException e) {
+                e.printStackTrace();
             }
         }
         return balance;
@@ -415,6 +422,7 @@ public class MemberDAO {
                     con.close();
                 }
             } catch (SQLException e) {
+                e.printStackTrace();
             }
         }
     } // end of getMemberInfo()
@@ -489,6 +497,7 @@ public class MemberDAO {
                     con.close();
                 }
             } catch (SQLException e) {
+                e.printStackTrace();
             }
         }
         return password;
@@ -579,7 +588,8 @@ public class MemberDAO {
                 if (con != null) {
                     con.close();
                 }
-            } catch (SQLException se) {
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
         }
 

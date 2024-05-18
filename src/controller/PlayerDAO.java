@@ -21,9 +21,10 @@ public class PlayerDAO {
             con = DBUtil.getConnection();
             pstmt = con.prepareStatement(sql);
             rs = pstmt.executeQuery();
-            
+
             System.out.println();
-            System.out.println(String.format("%-12s %-25s %-12s %-10s %-6s %-6s %-6s %-8s %-10s", "PLAYER NO.", "PLAYER NAME", "BACK NUMBER", "POSITION", "SHOOT", "PASS", "DEFEND", "PRICE", "CLUB NO."));
+            System.out.println(String.format("%-12s %-25s %-12s %-10s %-6s %-6s %-6s %-8s %-10s", "PLAYER NO.",
+                    "PLAYER NAME", "BACK NUMBER", "POSITION", "SHOOT", "PASS", "DEFEND", "PRICE", "CLUB NO."));
 
             while (rs.next()) {
                 pvo = new PlayerVO();
@@ -37,8 +38,10 @@ public class PlayerDAO {
                 pvo.setP_price(rs.getInt("p_price"));
                 pvo.setC_no(rs.getInt("c_no"));
 
-                System.out.println(String.format("%-12s %-25s %-12s %-10s %-6s %-6s %-6s %-8s %-10s", pvo.getP_no(), pvo.getP_name(), pvo.getP_backno(), pvo.getP_position(), pvo.getP_shoot(), pvo.getP_pass(), pvo.getP_defend(), pvo.getP_price(), pvo.getC_no()));
-                
+                System.out.println(String.format("%-12s %-25s %-12s %-10s %-6s %-6s %-6s %-8s %-10s", pvo.getP_no(),
+                        pvo.getP_name(), pvo.getP_backno(), pvo.getP_position(), pvo.getP_shoot(), pvo.getP_pass(),
+                        pvo.getP_defend(), pvo.getP_price(), pvo.getC_no()));
+
             }
         } catch (SQLException se) {
             System.out.println(se);
@@ -55,7 +58,8 @@ public class PlayerDAO {
                 if (con != null) {
                     con.close();
                 }
-            } catch (SQLException se) {
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
         }
 
@@ -93,11 +97,12 @@ public class PlayerDAO {
                 if (con != null) {
                     con.close();
                 }
-            } catch (SQLException se) {
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
         }
         return price;
-    } //end of getPlayerPrice()
+    } // end of getPlayerPrice()
 
     // 선수생성
     public void setPlayer(PlayerVO pv) {
@@ -118,7 +123,7 @@ public class PlayerDAO {
             pstmt.setInt(8, pv.getC_no());
 
             int i = pstmt.executeUpdate();
-            if(i == 1){
+            if (i == 1) {
                 System.out.println();
                 System.out.println("Create Complete.");
             } else {
@@ -129,16 +134,17 @@ public class PlayerDAO {
             e.printStackTrace();
         } finally {
             try {
-                if(pstmt != null){
+                if (pstmt != null) {
                     pstmt.close();
                 }
-                if(con != null){
+                if (con != null) {
                     con.close();
-                }                
+                }
             } catch (SQLException e) {
+                e.printStackTrace();
             }
         }
-    } //end of setPlayer()
+    } // end of setPlayer()
 
     // 선수1명 정보 가져옴
     public void getOnePlayer(String p_name, int c_no) {
@@ -154,8 +160,9 @@ public class PlayerDAO {
             pstmt.setString(1, p_name);
             pstmt.setInt(2, c_no);
             rs = pstmt.executeQuery();
-            
-            System.out.println(String.format("%-12s %-25s %-12s %-10s %-6s %-6s %-6s %-8s %-10s", "PLAYER NO.", "PLAYER NAME", "BACK NUMBER", "POSITION", "SHOOT", "PASS", "DEFEND", "PRICE", "CLUB NO."));
+
+            System.out.println(String.format("%-12s %-25s %-12s %-10s %-6s %-6s %-6s %-8s %-10s", "PLAYER NO.",
+                    "PLAYER NAME", "BACK NUMBER", "POSITION", "SHOOT", "PASS", "DEFEND", "PRICE", "CLUB NO."));
 
             if (rs.next()) {
                 pvo = new PlayerVO();
@@ -169,7 +176,9 @@ public class PlayerDAO {
                 pvo.setP_price(rs.getInt("p_price"));
                 pvo.setC_no(rs.getInt("c_no"));
 
-                System.out.println(String.format("%-12s %-25s %-12s %-10s %-6s %-6s %-6s %-8s %-10s", pvo.getP_no(), pvo.getP_name(), pvo.getP_backno(), pvo.getP_position(), pvo.getP_shoot(), pvo.getP_pass(), pvo.getP_defend(), pvo.getP_price(), pvo.getC_no()));
+                System.out.println(String.format("%-12s %-25s %-12s %-10s %-6s %-6s %-6s %-8s %-10s", pvo.getP_no(),
+                        pvo.getP_name(), pvo.getP_backno(), pvo.getP_position(), pvo.getP_shoot(), pvo.getP_pass(),
+                        pvo.getP_defend(), pvo.getP_price(), pvo.getC_no()));
             }
         } catch (SQLException se) {
             System.out.println(se);
@@ -186,14 +195,14 @@ public class PlayerDAO {
                 if (con != null) {
                     con.close();
                 }
-            } catch (SQLException se) {
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
         }
 
+    } // end of getOnePlayer()
 
-    } //end of getOnePlayer()
-
-    //전체 선수 목록에서 선수 제거
+    // 전체 선수 목록에서 선수 제거
     public void eliminatePlayer(int p_no) {
         String sql = "DELETE FROM PLAYER WHERE p_no = ?";
         Connection con = null;
@@ -228,6 +237,6 @@ public class PlayerDAO {
                 e.printStackTrace();
             }
         }
-    } //end of eliminatePlayer()
+    } // end of eliminatePlayer()
 
 }

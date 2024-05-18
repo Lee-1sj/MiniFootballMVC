@@ -1,10 +1,10 @@
 package model;
 
 public class OwnerVO {
-    private int o_no;   //owner 일련번호
-    private int m_no;   //member 일련번호
-    private int p_no;   //player 일련번호
-    
+    private int o_no; // owner 일련번호
+    private int m_no; // member 일련번호
+    private int p_no; // player 일련번호
+
     public OwnerVO() {
     }
 
@@ -31,8 +31,5 @@ public class OwnerVO {
     public void setP_no(int p_no) {
         this.p_no = p_no;
     }
-
-    
-    
 
 }

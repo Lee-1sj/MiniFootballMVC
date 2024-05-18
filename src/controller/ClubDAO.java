@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import model.ClubVO;
 
 public class ClubDAO {
-    //Club 전체 리스트
+    // Club 전체 리스트
     public void getClubTotalList() {
         String sql = "SELECT * FROM club order by c_no";
         Connection con = null;
@@ -45,13 +45,13 @@ public class ClubDAO {
                 if (con != null) {
                     con.close();
                 }
-            } catch (SQLException se) {
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
         }
-    } //end of getClubTotalList()
+    } // end of getClubTotalList()
 
-
-    //새 클럽 추가
+    // 새 클럽 추가
     public void createNewClub(String c_name) {
         String sql = "INSERT INTO CLUB VALUES (CLUB_SEQ.NEXTVAL, ?)";
         Connection con = null;
@@ -63,7 +63,7 @@ public class ClubDAO {
             pstmt.setString(1, c_name);
 
             int i = pstmt.executeUpdate();
-            if(i == 1){
+            if (i == 1) {
                 System.out.println();
                 System.out.println(c_name + "Create Complete.");
             } else {
@@ -74,16 +74,17 @@ public class ClubDAO {
             e.printStackTrace();
         } finally {
             try {
-                if(pstmt != null){
+                if (pstmt != null) {
                     pstmt.close();
                 }
-                if(con != null){
+                if (con != null) {
                     con.close();
-                }                
+                }
             } catch (SQLException e) {
+                e.printStackTrace();
             }
         }
-    } //end of createNewClub
+    } // end of createNewClub
 
     // 클럽 삭제
     public void eliminateClub(String c_name) {
@@ -120,6 +121,6 @@ public class ClubDAO {
                 e.printStackTrace();
             }
         }
-    } //end of eliminateClub()
+    } // end of eliminateClub()
 
 }

@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import model.PlayerVO;
 
 public class OwnerDAO {
-    //구매한 선수와 멤버를 맵핑테이블에 저장
+    // 구매한 선수와 멤버를 맵핑테이블에 저장
     public void savePlayerMember(int p_no, String memberId) {
         String sql = "INSERT INTO OWNER VALUES (OWNER_SEQ.NEXTVAL, (select m_no from members where m_id = ?), ?)";
         Connection con = null;
@@ -22,7 +22,7 @@ public class OwnerDAO {
             pstmt.setInt(2, p_no);
 
             int i = pstmt.executeUpdate();
-            if(i == 1){
+            if (i == 1) {
                 System.out.println("Purchase & Save Complete.");
             } else {
                 System.out.println("Purchase & Save Failed.");
@@ -31,18 +31,19 @@ public class OwnerDAO {
             e.printStackTrace();
         } finally {
             try {
-                if(pstmt != null){
+                if (pstmt != null) {
                     pstmt.close();
                 }
-                if(con != null){
+                if (con != null) {
                     con.close();
-                }                
+                }
             } catch (SQLException e) {
+                e.printStackTrace();
             }
         }
-    }//end of savePlayerMember()
+    }// end of savePlayerMember()
 
-    //오너테이블에서 멤버의 보유 선수 list > 객체를 ArrayList에 저장해서 리턴함
+    // 오너테이블에서 멤버의 보유 선수 list > 객체를 ArrayList에 저장해서 리턴함
     public ArrayList<PlayerVO> getMemberPlayerList(String memberId) {
         ArrayList<PlayerVO> memberPlayerList = null;
         String sql = "SELECT P.p_no, P.p_name, P.p_backno, P.p_position, P.p_shoot, P.p_pass, P.p_defend, P.p_price, P.c_no FROM OWNER O INNER JOIN PLAYER P ON O.p_no = P.p_no WHERE m_no = (SELECT m_no FROM MEMBERS WHERE m_id = ?)";
@@ -55,7 +56,7 @@ public class OwnerDAO {
             pstmt.setString(1, memberId);
             rs = pstmt.executeQuery();
             memberPlayerList = new ArrayList<>();
-            while(rs.next()) {
+            while (rs.next()) {
                 PlayerVO pv = new PlayerVO();
                 pv.setP_no(rs.getInt("p_no"));
                 pv.setP_name(rs.getString("p_name"));
@@ -74,22 +75,23 @@ public class OwnerDAO {
             e.printStackTrace();
         } finally {
             try {
-                if(rs != null){
+                if (rs != null) {
                     rs.close();
                 }
-                if(pstmt != null){
+                if (pstmt != null) {
                     pstmt.close();
                 }
-                if(con != null){
+                if (con != null) {
                     con.close();
                 }
             } catch (SQLException e) {
+                e.printStackTrace();
             }
         }
         return memberPlayerList;
-    }//end of getMemberPlayerList()
+    }// end of getMemberPlayerList()
 
-    //맵핑 테이블에서 선택한 선수 삭제
+    // 맵핑 테이블에서 선택한 선수 삭제
     public void deletePlayerMember(int p_no, String memberId) {
         String sql = "DELETE FROM OWNER where p_no = ? and m_no = (select m_no from members where m_id = ?)";
         Connection con = null;
@@ -125,6 +127,6 @@ public class OwnerDAO {
                 e.printStackTrace();
             }
         }
-    }//end of deletePlayerMember()
+    }// end of deletePlayerMember()
 
 }
