@@ -46,6 +46,7 @@ public class PlayerManager {
             price = sc.nextInt();
             sc.nextLine();
             cd.getClubTotalList(); // 클럽 전체 리스트 출력
+            System.out.println();
             System.out.print("Club No. >> ");
             c_no = sc.nextInt();
             sc.nextLine();

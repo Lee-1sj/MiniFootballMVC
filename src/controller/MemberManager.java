@@ -163,6 +163,7 @@ public class MemberManager {
         boolean success = false;
 
         try {
+            System.out.println();
             System.out.println("Enter the ID and PW of the Account you want to delete.");
             System.out.print("ID >> ");
             id = sc.nextLine();

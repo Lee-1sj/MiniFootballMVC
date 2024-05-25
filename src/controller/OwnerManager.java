@@ -10,9 +10,10 @@ public class OwnerManager {
     public static Scanner sc = new Scanner(System.in);
 
     // 맵핑테이블에서 보유한 선수 목록 출력하기
-    public void showMyPlayers(String memberId) {
+    public boolean showMyPlayers(String memberId) {
         ArrayList<PlayerVO> list = new ArrayList<>();
         OwnerDAO od = new OwnerDAO();
+        boolean flag = false;
 
         System.out.println();
         System.out.println("<List of My Players>");
@@ -22,14 +23,17 @@ public class OwnerManager {
             if (list.isEmpty()) {
                 System.out.println();
                 System.out.println("There are no players in possession."); // list가 비어있으면
+                flag = false;
             } else {
                 for (PlayerVO data : list) {
                     System.out.println(data.toString()); // 출력
                 }
+                flag = true;
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return flag;
     } // end of showMyPlayers()
 
     // 이적시장에서 선수 구매
@@ -43,6 +47,7 @@ public class OwnerManager {
 
         try {
             pd.getPlayerFromMarket(); // 이적시장 선수목록 출력
+            System.out.println();
             System.out.print("Enter the Player No. >> ");
             p_no = sc.nextInt();
             sc.nextLine();
@@ -77,6 +82,7 @@ public class OwnerManager {
 
         try {
             om.showMyPlayers(memberId); // 멤버가 보유 중인 선수목록 출력
+            System.out.println();
             System.out.print("Enter the Player NO. >> ");
             p_no = sc.nextInt();
             sc.nextLine();
@@ -100,17 +106,22 @@ public class OwnerManager {
         OwnerManager om = new OwnerManager();
         OwnerDAO od = new OwnerDAO();
         int p_no = 0;
+        boolean flag = false;
 
         try {
-            om.showMyPlayers(memberId); // 멤버가 보유 중인 선수목록 출력
-
-            System.out.println("select Player No. >> ");
-            p_no = sc.nextInt();
-            sc.nextLine();
-
-            od.deletePlayerMember(p_no, memberId); // 선택한 선수 삭제
-            System.out.println();
-            System.out.println(p_no + ". Player Release Success.");
+            flag = om.showMyPlayers(memberId); // 멤버가 보유 중인 선수목록 출력
+            if(flag){
+                System.out.println();
+                System.out.println("select Player No. >> ");
+                p_no = sc.nextInt();
+                sc.nextLine();
+    
+                od.deletePlayerMember(p_no, memberId); // 선택한 선수 삭제
+                System.out.println();
+                System.out.println(p_no + ". Player Release Success.");
+            } else {
+                System.out.println("Please buy the player first");
+            }
         } catch (InputMismatchException e) {
             e.printStackTrace();
             sc.nextLine();
