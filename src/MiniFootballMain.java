@@ -62,7 +62,6 @@ public class MiniFootballMain {
         MemberDAO md = new MemberDAO();
         MemberManager mm = new MemberManager();
         mm.verifyAdmin(); // 관리자 검증
-        // 관리자 메뉴 출력
 
         while (true) {
             MenuViewer.adminMenuView();
@@ -104,8 +103,6 @@ public class MiniFootballMain {
         int choice;
         String memberId = mm.verifyMember(); // 로그인 검증 > memberId를 키값으로 사용하기 위해 리턴
 
-        // 유저 메뉴 출력
-
         while (true) {
             MenuViewer.logInMenuView();
             choice = MenuViewer.choice.nextInt();
@@ -126,7 +123,6 @@ public class MiniFootballMain {
                     System.out.println("Please only enter the appropriate menu number.");
             } // end of switch
         }
-
     } // end of logInMenu()
 
     // 나의 팀 관리 메뉴
@@ -160,7 +156,6 @@ public class MiniFootballMain {
                     System.out.println("Please only enter the appropriate menu number.");
             }
         }
-
     } // end of customMenu()
 
     // 이적 시장 메뉴
@@ -198,7 +193,6 @@ public class MiniFootballMain {
                     System.out.println("Please only enter the appropriate menu number.");
             }
         }
-
     } // end of transferMenuView()
 
     // 나의 정보 관리
@@ -226,7 +220,6 @@ public class MiniFootballMain {
                     System.out.println("Please only enter the appropriate menu number.");
             } // end of switch
         }
-
     } // end of memberMenu()
 
     // 회원가입 메뉴

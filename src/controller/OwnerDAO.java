@@ -30,16 +30,7 @@ public class OwnerDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            try {
-                if (pstmt != null) {
-                    pstmt.close();
-                }
-                if (con != null) {
-                    con.close();
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+            DBUtil.closeResource(pstmt, con);
         }
     }// end of savePlayerMember()
 
@@ -50,6 +41,7 @@ public class OwnerDAO {
         Connection con = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
+        
         try {
             con = DBUtil.getConnection();
             pstmt = con.prepareStatement(sql);
@@ -74,19 +66,7 @@ public class OwnerDAO {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            try {
-                if (rs != null) {
-                    rs.close();
-                }
-                if (pstmt != null) {
-                    pstmt.close();
-                }
-                if (con != null) {
-                    con.close();
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+            DBUtil.closeResource(rs, pstmt, con);
         }
         return memberPlayerList;
     }// end of getMemberPlayerList()
@@ -116,16 +96,7 @@ public class OwnerDAO {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            try {
-                if (pstmt != null) {
-                    pstmt.close();
-                }
-                if (con != null) {
-                    con.close();
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+            DBUtil.closeResource(pstmt, con);
         }
     }// end of deletePlayerMember()
 

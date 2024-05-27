@@ -21,7 +21,6 @@ public class PlayerDAO {
             con = DBUtil.getConnection();
             pstmt = con.prepareStatement(sql);
             rs = pstmt.executeQuery();
-
             System.out.println();
             System.out.println(String.format("%-12s %-25s %-12s %-10s %-6s %-6s %-6s %-8s %-10s", "PLAYER NO.",
                     "PLAYER NAME", "BACK NUMBER", "POSITION", "SHOOT", "PASS", "DEFEND", "PRICE", "CLUB NO."));
@@ -41,28 +40,14 @@ public class PlayerDAO {
                 System.out.println(String.format("%-12s %-25s %-12s %-10s %-6s %-6s %-6s %-8s %-10s", pvo.getP_no(),
                         pvo.getP_name(), pvo.getP_backno(), pvo.getP_position(), pvo.getP_shoot(), pvo.getP_pass(),
                         pvo.getP_defend(), pvo.getP_price(), pvo.getC_no()));
-
             }
         } catch (SQLException se) {
             System.out.println(se);
         } catch (Exception e) {
             System.out.println(e);
         } finally {
-            try {
-                if (rs != null) {
-                    rs.close();
-                }
-                if (pstmt != null) {
-                    pstmt.close();
-                }
-                if (con != null) {
-                    con.close();
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+            DBUtil.closeResource(rs, pstmt, con);
         }
-
     } // end of getPlayerFromMarket()
 
     // 선수의 가격을 불러오는 함수
@@ -78,7 +63,6 @@ public class PlayerDAO {
             pstmt = con.prepareStatement(sql);
             pstmt.setInt(1, p_no);
             rs = pstmt.executeQuery();
-
             if (rs.next()) {
                 price = rs.getInt("p_price");
             }
@@ -87,19 +71,7 @@ public class PlayerDAO {
         } catch (Exception e) {
             System.out.println(e);
         } finally {
-            try {
-                if (rs != null) {
-                    rs.close();
-                }
-                if (pstmt != null) {
-                    pstmt.close();
-                }
-                if (con != null) {
-                    con.close();
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+            DBUtil.closeResource(rs, pstmt, con);
         }
         return price;
     } // end of getPlayerPrice()
@@ -133,16 +105,7 @@ public class PlayerDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            try {
-                if (pstmt != null) {
-                    pstmt.close();
-                }
-                if (con != null) {
-                    con.close();
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+            DBUtil.closeResource(pstmt, con);
         }
     } // end of setPlayer()
 
@@ -185,21 +148,8 @@ public class PlayerDAO {
         } catch (Exception e) {
             System.out.println(e);
         } finally {
-            try {
-                if (rs != null) {
-                    rs.close();
-                }
-                if (pstmt != null) {
-                    pstmt.close();
-                }
-                if (con != null) {
-                    con.close();
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+            DBUtil.closeResource(rs, pstmt, con);
         }
-
     } // end of getOnePlayer()
 
     // 전체 선수 목록에서 선수 제거
@@ -226,16 +176,7 @@ public class PlayerDAO {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            try {
-                if (pstmt != null) {
-                    pstmt.close();
-                }
-                if (con != null) {
-                    con.close();
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+            DBUtil.closeResource(pstmt, con);
         }
     } // end of eliminatePlayer()
 

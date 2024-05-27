@@ -14,7 +14,6 @@ public class OwnerManager {
         ArrayList<PlayerVO> list = new ArrayList<>();
         OwnerDAO od = new OwnerDAO();
         boolean flag = false;
-
         System.out.println();
         System.out.println("<List of My Players>");
 
@@ -53,7 +52,6 @@ public class OwnerManager {
             sc.nextLine();
             playerPrice = pd.getPlayerPrice(p_no); // 선수의 가격 조회
             memberBalance = md.getMemberBalance(memberId); // 멤버의 잔액 조회
-
             if (memberBalance >= playerPrice) {
                 int newBalance = memberBalance - playerPrice;
                 md.setMemberBalance(newBalance, memberId); // 계산 후 잔액을 저장
@@ -86,7 +84,6 @@ public class OwnerManager {
             System.out.print("Enter the Player NO. >> ");
             p_no = sc.nextInt();
             sc.nextLine();
-
             playerPrice = pd.getPlayerPrice(p_no); // 선수의 가격 조회
             memberBalance = md.getMemberBalance(memberId); // 멤버의 잔액 조회
             int newBalance = memberBalance + playerPrice;
@@ -115,7 +112,6 @@ public class OwnerManager {
                 System.out.println("select Player No. >> ");
                 p_no = sc.nextInt();
                 sc.nextLine();
-    
                 od.deletePlayerMember(p_no, memberId); // 선택한 선수 삭제
                 System.out.println();
                 System.out.println(p_no + ". Player Release Success.");
