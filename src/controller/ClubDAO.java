@@ -22,7 +22,9 @@ public class ClubDAO {
             rs = pstmt.executeQuery();
 
             System.out.println();
+            System.out.println("----------------------------------------");
             System.out.println("CLUB NO\t\tCLUB NAME");
+            System.out.println("----------------------------------------");
 
             while (rs.next()) {
                 cVo = new ClubVO();
@@ -30,6 +32,7 @@ public class ClubDAO {
                 cVo.setC_name(rs.getString("c_name"));
                 System.out.println(cVo.getC_no() + "\t\t" + cVo.getC_name());
             }
+            System.out.println("----------------------------------------");
         } catch (SQLException se) {
             System.out.println(se);
         } catch (Exception e) {

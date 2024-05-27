@@ -22,9 +22,12 @@ public class PlayerDAO {
             pstmt = con.prepareStatement(sql);
             rs = pstmt.executeQuery();
             System.out.println();
+            System.out.println(
+                    "-----------------------------------------------------------------------------------------------------");
             System.out.println(String.format("%-12s %-25s %-12s %-10s %-6s %-6s %-6s %-8s %-10s", "PLAYER NO.",
                     "PLAYER NAME", "BACK NUMBER", "POSITION", "SHOOT", "PASS", "DEFEND", "PRICE", "CLUB NO."));
-
+            System.out.println(
+                    "-----------------------------------------------------------------------------------------------------");
             while (rs.next()) {
                 pvo = new PlayerVO();
                 pvo.setP_no(rs.getInt("p_no"));
@@ -40,6 +43,8 @@ public class PlayerDAO {
                 System.out.println(String.format("%-12s %-25s %-12s %-10s %-6s %-6s %-6s %-8s %-10s", pvo.getP_no(),
                         pvo.getP_name(), pvo.getP_backno(), pvo.getP_position(), pvo.getP_shoot(), pvo.getP_pass(),
                         pvo.getP_defend(), pvo.getP_price(), pvo.getC_no()));
+                System.out.println(
+                        "-----------------------------------------------------------------------------------------------------");
             }
         } catch (SQLException se) {
             System.out.println(se);
@@ -98,9 +103,11 @@ public class PlayerDAO {
             if (i == 1) {
                 System.out.println();
                 System.out.println("Create Complete.");
+                System.out.println("----------------------------------------");
             } else {
                 System.out.println();
                 System.out.println("Create Failed.");
+                System.out.println("----------------------------------------");
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -123,10 +130,12 @@ public class PlayerDAO {
             pstmt.setString(1, p_name);
             pstmt.setInt(2, c_no);
             rs = pstmt.executeQuery();
-
+            System.out.println(
+                    "-----------------------------------------------------------------------------------------------------");
             System.out.println(String.format("%-12s %-25s %-12s %-10s %-6s %-6s %-6s %-8s %-10s", "PLAYER NO.",
                     "PLAYER NAME", "BACK NUMBER", "POSITION", "SHOOT", "PASS", "DEFEND", "PRICE", "CLUB NO."));
-
+            System.out.println(
+                    "-----------------------------------------------------------------------------------------------------");
             if (rs.next()) {
                 pvo = new PlayerVO();
                 pvo.setP_no(rs.getInt("p_no"));
@@ -142,6 +151,8 @@ public class PlayerDAO {
                 System.out.println(String.format("%-12s %-25s %-12s %-10s %-6s %-6s %-6s %-8s %-10s", pvo.getP_no(),
                         pvo.getP_name(), pvo.getP_backno(), pvo.getP_position(), pvo.getP_shoot(), pvo.getP_pass(),
                         pvo.getP_defend(), pvo.getP_price(), pvo.getC_no()));
+                System.out.println(
+                        "-----------------------------------------------------------------------------------------------------");
             }
         } catch (SQLException se) {
             System.out.println(se);
@@ -167,9 +178,13 @@ public class PlayerDAO {
             if (i == 1) {
                 System.out.println();
                 System.out.println(p_no + " Player Delete Success");
+                System.out.println("----------------------------------------");
+                System.out.println();
             } else {
                 System.out.println();
                 System.out.println("Delete Failed");
+                System.out.println("----------------------------------------");
+                System.out.println();
             }
         } catch (SQLException e) {
             e.printStackTrace();

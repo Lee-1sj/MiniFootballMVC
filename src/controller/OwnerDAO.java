@@ -24,8 +24,12 @@ public class OwnerDAO {
             int i = pstmt.executeUpdate();
             if (i == 1) {
                 System.out.println("Purchase & Save Complete.");
+                System.out.println("----------------------------------------");
+                System.out.println();
             } else {
                 System.out.println("Purchase & Save Failed.");
+                System.out.println("----------------------------------------");
+                System.out.println();
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -87,9 +91,11 @@ public class OwnerDAO {
             if (i == 1) {
                 System.out.println();
                 System.out.println(p_no + ". Player Delete Success");
+                System.out.println("----------------------------------------");
             } else {
                 System.out.println();
                 System.out.println("Delete Failed");
+                System.out.println("----------------------------------------");
             }
         } catch (SQLException e) {
             e.printStackTrace();

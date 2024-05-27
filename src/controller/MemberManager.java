@@ -59,7 +59,7 @@ public class MemberManager {
             md.setMemberRegister(mvo);
             // 가입 회원 정보 출력
             System.out.println();
-            System.out.println("=====New Member Info======");
+            System.out.println("------------------- New Member Info --------------------");
             md.getMember(mvo.getM_id(), mvo.getM_pw()); // 가입한 member 객체만 불러서 정보 출력
             System.out.println();
         } catch (Exception e) {
@@ -75,7 +75,7 @@ public class MemberManager {
         boolean isAdmin = false;
         // 관리자 로그인 확인
         System.out.println();
-        System.out.println("===== Admin Log In ======");
+        System.out.println("------------- Admin Log In -------------");
 
         try {
             do {
@@ -86,7 +86,8 @@ public class MemberManager {
 
                 isAdmin = md.getAdminLogin(id, pw); // 검증
                 if (!isAdmin) {
-                    System.out.println("The Admin account is not valid. Please re-enter.");
+                    System.out.println("Account is not valid. Please re-enter.");
+                    System.out.println("----------------------------------------");
                     System.out.println();
                 }
             } while (!isAdmin);
@@ -104,10 +105,10 @@ public class MemberManager {
         boolean success = false;
         // 로그인 확인
         System.out.println();
-        System.out.println("===== Log In ======");
-
+        
         try {
             do {
+                System.out.println("---------------- Log In ----------------");
                 System.out.print("Input ID >> ");
                 id = sc.nextLine();
                 System.out.print("Input PW >> ");
@@ -115,7 +116,10 @@ public class MemberManager {
 
                 success = md.getMemberLogin(id, pw); // 입력받은 값 두 개로 db에서 찾음
                 if (!success) {
-                    System.out.println("The account information is not valid. Please re-enter.");
+                    System.out.println();
+                    System.out.println("Account is not valid. Please re-enter.");
+                    System.out.println("----------------------------------------");
+                    System.out.println();
                     System.out.println();
                 }
             } while (!success);
@@ -132,8 +136,11 @@ public class MemberManager {
         MemberDAO md = new MemberDAO();
 
         System.out.println();
-        System.out.println("=========================== My Info ===========================");
+        System.out.println();
+        System.out.println("------------------------- My Info -------------------------");
         md.getMemberInfo(memberId);
+        System.out.println("-----------------------------------------------------------");
+        System.out.println();
     } // end of showMyAccountInfo()
 
     // 비밀번호 수정
@@ -145,7 +152,8 @@ public class MemberManager {
         try {
             mm.showMyAccountInfo(memberId); // 내 정보 출력
             System.out.println();
-            System.out.print("Enter a new Password >> ");
+            System.out.println("----------------------------------------");
+            System.out.print("     Enter a new Password >> ");
             newPW = sc.nextLine();
             md.changePassword(newPW, memberId); // 비밀번호 변경
             mm.showMyAccountInfo(memberId); // 변경한 내 정보 출력
@@ -160,10 +168,11 @@ public class MemberManager {
         String id;
         String pw;
         String answer;
-        boolean success = false;
 
         try {
             System.out.println();
+            System.out.println();
+            System.out.println("-------------------------------------------------------");
             System.out.println("Enter the ID and PW of the Account you want to delete.");
             System.out.print("ID >> ");
             id = sc.nextLine();
@@ -181,10 +190,12 @@ public class MemberManager {
                 } else {
                     System.out.println();
                     System.out.println("Account info does not match. Please try again later.");
+                    System.out.println("-------------------------------------------------------");
                 }
             } else {
                 System.out.println();
                 System.out.println("The delete procedure has been canceled.");
+                System.out.println("-------------------------------------------------------");
             }
         } catch (Exception e) {
             e.printStackTrace();

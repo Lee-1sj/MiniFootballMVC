@@ -39,7 +39,8 @@ public class MiniFootballMain {
                         adminMenu();
                         break;
                     case MENU_CHOICE.EXIT: // 4. 종료
-                        System.out.println("Exit the program.");
+                        System.out.println("           Exit the program.");
+                        System.out.println();
                         return;
                     default:
                         System.out.println("Please only enter the appropriate menu number.");
@@ -185,7 +186,11 @@ public class MiniFootballMain {
                 case TRANSFER_CHOICE.BALANCE: // 잔고확인
                     int balance = md.getMemberBalance(memberId);
                     System.out.println();
+                    System.out.println();
+                    System.out.println("----------------------------------------");
                     System.out.println("Your balance is : " + balance + " M");
+                    System.out.println("----------------------------------------");
+                    System.out.println();
                     break;
                 case TRANSFER_CHOICE.BACK: // 뒤로 가기
                     return;
