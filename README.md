@@ -10,7 +10,7 @@ Java와 Oracle을 활용하여 이적시장 프로그램을 제작
 |-----|------|  
 |OS|Windows 11 Home|
 |Language|Java 17.0.11|
-|Editor|May 2024 (version 1.90)|
+|Editor|Visual Studio Code (version 1.90)|
 |DBMS|Oracle 17c|
 |Github|https://github.com/Lee-1sj/MiniFootballMVC|
 
